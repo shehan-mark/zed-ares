@@ -6,22 +6,22 @@ _data = pd.read_csv('1 - initial data/init_data.csv', names = ["numOfEnemies", "
 # print(_data)
 
 # def constants
-max_enemy_count = 3
-min_health_level = 80
-min_min_health_level = 50
-min_tot_distance = 1500
+max_enemy_count = 2
+min_health_level = 60
+min_min_health_level = 30
+min_tot_distance = 80
 
 action_engage_identifier = 1
 
 def feature_identifier(eCount, hlvl, eDis):
   retVal = -1
-  if eCount >= max_enemy_count:
-    # if hlvl < min_health_level and eDis < min_tot_distance:
-    #   retVal = 1
-    # elif eDis < min_tot_distance:
-    #   retVal = 1
-    # else:
-    retVal = 1
+  if eCount > max_enemy_count:
+    if hlvl < min_health_level and eDis < min_tot_distance:
+      retVal = 1
+    elif eDis < min_tot_distance:
+      retVal = 1
+    else:
+      retVal = 0
   elif hlvl < min_min_health_level and eDis < min_tot_distance:
     retVal = 1
   else:
