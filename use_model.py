@@ -40,24 +40,28 @@ def neural_network_model(data):
 
 
 
-def use_neural_network():
-  prediction = neural_network_model(x)
-  _data = pd.read_csv('processed_data.csv', names = ["class", "enemies", "health", "distance"])
-  X = _data.drop('class',axis=1)    
+def use_neural_network(input_arr):
+  prediction = neural_network_model(x)   
   with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     saver = tf.train.Saver()
 
     saver.restore(sess,"./model/model.ckpt")
     
-    inputA = [3,70,500]
-    result = (sess.run(tf.argmax(prediction.eval(feed_dict={x:[inputA]}),1)))
-    preds = prediction.eval(feed_dict={x:[inputA]})
+    input_arr = np.array(list(input_arr))
+    result = (sess.run(tf.argmax(prediction.eval(feed_dict={x:[input_arr]}),1)))
+    preds = prediction.eval(feed_dict={x:[input_arr]})
     print(preds)
-    print(result)
-    if preds[0][0] < preds[0][1]:
-      print('aggressive')
-    else:
-      print('normal')
+    # print(result)
+    # if result[0] == 1:
+    #   print('aggressive')
+    # else:
+    #   print('normal')
+    
+    return result[0]
 
-use_neural_network()
+res = use_neural_network([3,70,500])
+if res == 1:
+  print('aggressive')
+else:
+  print('normal')
