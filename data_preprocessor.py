@@ -7,7 +7,7 @@ _data = pd.read_csv('1 - initial data/init_data.csv', names = ["numOfEnemies", "
 
 # def constants
 max_enemy_count = 3
-min_health_level = 80
+min_health_level = 70
 min_min_health_level = 50
 min_tot_distance = 1500
 

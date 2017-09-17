@@ -7,7 +7,7 @@ import pickle
 import random
 
 def create_train_and_test_data():
-  _data = pd.read_csv('2 - preprocessed data/processed_data.csv', names = ["class", "enemies", "health", "distance"])
+  _data = pd.read_csv('processed_data.csv', names = ["class", "enemies", "health", "distance"])
   X = _data.drop('class',axis=1)
   y = _data['class']
 
@@ -22,7 +22,7 @@ def create_train_and_test_data():
       fee.append([tArrSec, [0,1]])
     # print(fee)
     # break
-  random.shuffle(fee)
+  # random.shuffle(fee)
   fee = np.array(fee)
   testing_size = int(0.1 * len(_data))
 
@@ -94,7 +94,7 @@ def train_neural_network(x):
     while epoch <= hm_epochs:
 
       if epoch != 1:
-          saver.restore(sess,"./3 - model/model.ckpt")
+          saver.restore(sess,"./model/model.ckpt")
       epoch_loss = 1
       # for _ in range(int(mnist.train.num_examples/batch_size)):
       #   e_x, e_y = mnist.train.next_batch(batch_size) 
@@ -109,7 +109,7 @@ def train_neural_network(x):
         epoch_loss += c
         i += batch_size
       
-      saver.save(sess, "./3 - model/model.ckpt")
+      saver.save(sess, "./model/model.ckpt")
       print('Epoch', epoch, 'completed out of', hm_epochs, 'loss: ', epoch_loss)
       with open(tf_log,'a') as f:
         f.write(str(epoch)+'\n') 

@@ -42,15 +42,15 @@ def neural_network_model(data):
 
 def use_neural_network():
   prediction = neural_network_model(x)
-  # _data = pd.read_csv('processed_data.csv', names = ["class", "enemies", "health", "distance"])
-  # X = _data.drop('class',axis=1)    
+  _data = pd.read_csv('processed_data.csv', names = ["class", "enemies", "health", "distance"])
+  X = _data.drop('class',axis=1)    
   with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     saver = tf.train.Saver()
 
-    saver.restore(sess,"./3 - model/model.ckpt")
+    saver.restore(sess,"./model/model.ckpt")
     
-    inputA = [2,100,500]
+    inputA = [3,100,5000]
     result = (sess.run(tf.argmax(prediction.eval(feed_dict={x:[inputA]}),1)))
     preds = prediction.eval(feed_dict={x:[inputA]})
     print(preds)
