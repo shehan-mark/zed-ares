@@ -50,7 +50,7 @@ def use_neural_network():
 
     saver.restore(sess,"./model/model.ckpt")
     
-    inputA = [3,100,5000]
+    inputA = [3,70,500]
     result = (sess.run(tf.argmax(prediction.eval(feed_dict={x:[inputA]}),1)))
     preds = prediction.eval(feed_dict={x:[inputA]})
     print(preds)
